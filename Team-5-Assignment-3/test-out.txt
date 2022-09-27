@@ -1,0 +1,154 @@
+---------Team 5----------
+Member: 
+		Chavez, Alberto Francisco
+		Duong, Nguyen Minh Huy
+		Fitzgerald, Daniel
+
+<PROGRAM test line="1">
+	<COMPOUND line="3">
+		<ASSIGN line="4">
+			<VARIABLE id="i" level="0" />
+			<INTEGER_CONSTANT value="1" />
+		</ASSIGN>
+		<ASSIGN line="5">
+			<VARIABLE id="j" level="0" />
+			<INTEGER_CONSTANT value="2" />
+		</ASSIGN>
+		<IF line="6">
+			<TEST>
+				<EQUAL line="6">
+					<VARIABLE id="i" level="0" />
+					<VARIABLE id="j" level="0" />
+				</EQUAL>
+			</TEST>
+			<TRUE_STATEMENT line="7">
+				<WRITELN line="7">
+					<STRING_CONSTANT value=''Equal'' />
+				</WRITELN>
+			</TRUE_STATEMENT>
+			<FALSE_STATEMENT line="9">
+				<WRITELN line="9">
+					<STRING_CONSTANT value=''Not Equal'' />
+				</WRITELN>
+			</FALSE_STATEMENT>
+		</IF>
+		<FOR_LOOP line="11">
+			<ASSIGN line="11">
+				<VARIABLE id="count" level="0" />
+				<INTEGER_CONSTANT value="1" />
+			</ASSIGN>
+			<TO>
+				<INTEGER_CONSTANT value="10" />
+			</TO>
+			<LOOP>
+				<COMPOUND line="12">
+					<ASSIGN line="13">
+						<VARIABLE id="i" level="0" />
+						<ADD line="13">
+							<VARIABLE id="count" level="0" />
+							<INTEGER_CONSTANT value="1" />
+						</ADD>
+					</ASSIGN>
+					<ASSIGN line="14">
+						<VARIABLE id="j" level="0" />
+						<VARIABLE id="i" level="0" />
+					</ASSIGN>
+				</COMPOUND>
+			</LOOP>
+		</FOR_LOOP>
+		<WHILE_LOOP line="17">
+			<TEST>
+				<LT line="17">
+					<VARIABLE id="i" level="0" />
+					<INTEGER_CONSTANT value="10" />
+				</LT>
+			</TEST>
+			<LOOP>
+				<COMPOUND line="18">
+					<WRITE line="19">
+						<VARIABLE id="i" level="0" />
+					</WRITE>
+					<ASSIGN line="20">
+						<VARIABLE id="i" level="0" />
+						<ADD line="20">
+							<VARIABLE id="i" level="0" />
+							<INTEGER_CONSTANT value="1" />
+						</ADD>
+					</ASSIGN>
+				</COMPOUND>
+			</LOOP>
+		</WHILE_LOOP>
+		<REPEAT_LOOP line="23">
+			<LOOP>
+				<ASSIGN line="24">
+					<VARIABLE id="j" level="0" />
+					<ADD line="1">
+						<VARIABLE id="j" level="0" />
+						<DIVIDE line="1">
+							<VARIABLE id="j" level="0" />
+							<INTEGER_CONSTANT value="2" />
+						</DIVIDE>
+					</ADD>
+				</ASSIGN>
+				<ASSIGN line="25">
+					<VARIABLE id="i" level="0" />
+					<DIVIDE line="1">
+						<VARIABLE id="i" level="0" />
+						<MULTIPLY line="1">
+							<ADD line="25">
+								<VARIABLE id="j" level="0" />
+								<INTEGER_CONSTANT value="10" />
+							</ADD>
+							<INTEGER_CONSTANT value="20" />
+						</MULTIPLY>
+					</DIVIDE>
+				</ASSIGN>
+				<WRITELN line="26">
+					<VARIABLE id="j" level="0" />
+				</WRITELN>
+			</LOOP>
+			<TEST>
+				<EQUAL line="27">
+					<VARIABLE id="j" level="0" />
+					<INTEGER_CONSTANT value="1" />
+				</EQUAL>
+			</TEST>
+		</REPEAT_LOOP>
+		<CASE_STATEMENT line="29">
+			<ADD line="29">
+				<VARIABLE id="i" level="0" />
+				<INTEGER_CONSTANT value="1" />
+			</ADD>
+			<LIST line="30">
+				<INTEGER_CONSTANT value="1" />
+				<INTEGER_CONSTANT value="2" />
+				<INTEGER_CONSTANT value="3" />
+				<ASSIGN line="30">
+					<VARIABLE id="j" level="0" />
+					<ADD line="30">
+						<VARIABLE id="j" level="0" />
+						<INTEGER_CONSTANT value="1" />
+					</ADD>
+				</ASSIGN>
+			</LIST>
+			<LIST line="31">
+				<INTEGER_CONSTANT value="4" />
+				<INTEGER_CONSTANT value="5" />
+				<ASSIGN line="31">
+					<VARIABLE id="j" level="0" />
+					<ADD line="31">
+						<VARIABLE id="j" level="0" />
+						<INTEGER_CONSTANT value="2" />
+					</ADD>
+				</ASSIGN>
+			</LIST>
+		</CASE_STATEMENT>
+	</COMPOUND>
+</PROGRAM>
+
+
+Symbol Table
+Program name: 	test
+Variable name: j		 type: INTEGER
+Variable name: i		 type: INTEGER
+Variable name: count		 type: INTEGER

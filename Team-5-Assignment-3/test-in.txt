@@ -1,0 +1,33 @@
+PROGRAM test;
+
+BEGIN
+    i:= 1;
+    j:= 2;
+    if i = j then
+        writeln('Equal')
+    else
+        writeln('Not Equal');
+
+    for count:= 1 to 10 do
+    begin
+        i:= count + 1;
+        j:= i;
+    end;
+
+    while i < 10 do
+    begin
+        write(i:1:0);
+        i:= i + 1
+    end;
+
+    repeat
+        j+= j / 2;
+        i/= (j+10)*20;
+        writeln(j);
+    until j = 1;
+
+    case i+1 of
+        1, 2, 3: j:= j + 1;
+        4, 5: j:= j + 2;
+    end
+END.

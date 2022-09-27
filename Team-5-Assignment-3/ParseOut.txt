@@ -1,0 +1,6 @@
+Parse Tree
+Error at line 61: Expecting THEN at div
+Error at line 61: Unexpected token at then
+Error at line 61: Unexpected token at else
+
+There were 3 errors.
