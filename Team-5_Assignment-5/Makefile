@@ -15,14 +15,6 @@ OUT = main.o
 ANTLR_SOURCES = target/generated-sources/ant4/*.cpp
 SOURCES = $(ANTLR_SOURCES) $(PROG)
 
-scan:
-	./$(OUT) -scan input.txt
-	cat ScanOut.txt
-
-parse:
-	./$(OUT) -parse input.txt
-	cat ParseOut.txt
-
 compile:
 	g++ -o $(OUT) -I$(ANTLR_RUNTIME_INCLUDES) -I$(ANTLR_INCLUDES) -I$(PROJECT_PATH) -L$(LIB_PATH) -w $(SOURCES) -l$(LIB)
 
@@ -30,8 +22,5 @@ antlr:
 	$(antlr4) -o ./target/generated-sources/ant4 -no-listener -visitor -encoding UTF-8 -Dlanguage=Cpp $(ANTLRFILE)
 
 clean:
-	rm -rf target .antlr .vscode
-	rm *.o ParseOut.txt ScanOut.txt
-
-clean-output:
-	rm ParseOut.txt ScanOut.txt
+	rm -rf target
+	rm *.o
