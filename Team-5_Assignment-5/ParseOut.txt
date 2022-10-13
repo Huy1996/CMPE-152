@@ -1,4 +1,323 @@
 Parse Tree
 
 Parse tree (Lisp format):
-(program (program_header program (program_name TestFor) ;) (program_body (program_declaration (variable_section var (var_declaration (var_list (var_name i) , (var_name j)) : (data_type (type_name integer)) ; (var_list (var_name ch)) : (data_type (type_name char)))) ;) (compound_statement begin (statement_list (statement (for_statement for (assign_statement (lhs (variable i)) := (rhs (expression (single_expression (term_expression (factor (number (unsign_number 1)))))))) to (expression (single_expression (term_expression (factor (number (unsign_number 5)))))) do (statement (writeln_statement writeln (write_argument_list ( (write_argument (expression (single_expression (term_expression (factor (string_constant 'i = ')))))) , (write_argument (expression (single_expression (term_expression (factor (variable i)))))) )))))) ; (statement (writeln_statement writeln)) ; (statement (for_statement for (assign_statement (lhs (variable i)) := (rhs (expression (single_expression (term_expression (factor (number (unsign_number 1)))))))) to (expression (single_expression (term_expression (factor (number (unsign_number 3)))))) do (statement (compound_statement begin (statement_list (statement (for_statement for (assign_statement (lhs (variable j)) := (rhs (expression (single_expression (term_expression (factor (number (unsign_number 4)))))))) downto (expression (single_expression (term_expression (factor (number (unsign_number 1)))))) do (statement (compound_statement begin (statement_list (statement (writeln_statement writeln (write_argument_list ( (write_argument (expression (single_expression (term_expression (factor (string_constant 'i = ')))))) , (write_argument (expression (single_expression (term_expression (factor (variable i)))))) , (write_argument (expression (single_expression (term_expression (factor (string_constant ', j = ')))))) , (write_argument (expression (single_expression (term_expression (factor (variable j)))))) )))) ; (statement empty_statement)) END))))) end)))) ; (statement (writeln_statement writeln)) ; (statement (for_statement for (assign_statement (lhs (variable ch)) := (rhs (expression (single_expression (term_expression (factor (char_constant 'a'))))))) to (expression (single_expression (term_expression (factor (char_constant 'z'))))) do (statement (write_statement write (write_argument_list ( (write_argument (expression (single_expression (term_expression (factor (variable ch)))))) )))))) ; (statement (writeln_statement writeln)) ; (statement (for_statement for (assign_statement (lhs (variable ch)) := (rhs (expression (single_expression (term_expression (factor (char_constant 'Z'))))))) DOWNto (expression (single_expression (term_expression (factor (char_constant 'A'))))) do (statement (write_statement write (write_argument_list ( (write_argument (expression (single_expression (term_expression (factor (variable ch)))))) )))))) ; (statement (writeln_statement writeln)) ; (statement empty_statement)) end)) . <EOF>)
+< program >
+  < program_header 
+    < program_name TestFor />
+  </ program_header >
+  < program_body >
+    < program_declaration >
+      < variable_section 
+        < var_declaration >
+          < var_list >
+            < var_name i />
+            < var_name j />
+          </ var_list >
+          < data_type >
+            < type_name integer />
+          </ data_type >
+          < var_list >
+            < var_name ch />
+          </ var_list >
+          < data_type >
+            < type_name char />
+          </ data_type >
+        </ var_declaration >
+      </ variable_section >
+    </ program_declaration >
+    < compound_statement 
+      < statement_list >
+        < statement >
+          < for_statement 
+            < assign_statement >
+              < lhs >
+                < variable i />
+              </ lhs >
+              < rhs >
+                < expression >
+                  < single_expression >
+                    < term_expression >
+                      < factor >
+                        < number >
+                          < unsign_number 1 />
+                        </ number >
+                      </ factor >
+                    </ term_expression >
+                  </ single_expression >
+                </ expression >
+              </ rhs >
+            </ assign_statement >
+            < expression >
+              < single_expression >
+                < term_expression >
+                  < factor >
+                    < number >
+                      < unsign_number 5 />
+                    </ number >
+                  </ factor >
+                </ term_expression >
+              </ single_expression >
+            </ expression >
+            < statement >
+              < writeln_statement writeln />
+                < write_argument_list 
+                  < write_argument >
+                    < expression >
+                      < single_expression >
+                        < term_expression >
+                          < factor >
+                            < string_constant 'i = ' />
+                          </ factor >
+                        </ term_expression >
+                      </ single_expression >
+                    </ expression >
+                  </ write_argument >
+                  < write_argument >
+                    < expression >
+                      < single_expression >
+                        < term_expression >
+                          < factor >
+                            < variable i />
+                          </ factor >
+                        </ term_expression >
+                      </ single_expression >
+                    </ expression >
+                  </ write_argument >
+                </ write_argument_list >
+            </ statement >
+          </ for_statement >
+        </ statement >
+        < statement >
+          < writeln_statement writeln />
+        </ statement >
+        < statement >
+          < for_statement 
+            < assign_statement >
+              < lhs >
+                < variable i />
+              </ lhs >
+              < rhs >
+                < expression >
+                  < single_expression >
+                    < term_expression >
+                      < factor >
+                        < number >
+                          < unsign_number 1 />
+                        </ number >
+                      </ factor >
+                    </ term_expression >
+                  </ single_expression >
+                </ expression >
+              </ rhs >
+            </ assign_statement >
+            < expression >
+              < single_expression >
+                < term_expression >
+                  < factor >
+                    < number >
+                      < unsign_number 3 />
+                    </ number >
+                  </ factor >
+                </ term_expression >
+              </ single_expression >
+            </ expression >
+            < statement >
+              < compound_statement 
+                < statement_list >
+                  < statement >
+                    < for_statement 
+                      < assign_statement >
+                        < lhs >
+                          < variable j />
+                        </ lhs >
+                        < rhs >
+                          < expression >
+                            < single_expression >
+                              < term_expression >
+                                < factor >
+                                  < number >
+                                    < unsign_number 4 />
+                                  </ number >
+                                </ factor >
+                              </ term_expression >
+                            </ single_expression >
+                          </ expression >
+                        </ rhs >
+                      </ assign_statement >
+                      < expression >
+                        < single_expression >
+                          < term_expression >
+                            < factor >
+                              < number >
+                                < unsign_number 1 />
+                              </ number >
+                            </ factor >
+                          </ term_expression >
+                        </ single_expression >
+                      </ expression >
+                      < statement >
+                        < compound_statement 
+                          < statement_list >
+                            < statement >
+                              < writeln_statement writeln />
+                                < write_argument_list 
+                                  < write_argument >
+                                    < expression >
+                                      < single_expression >
+                                        < term_expression >
+                                          < factor >
+                                            < string_constant 'i = ' />
+                                          </ factor >
+                                        </ term_expression >
+                                      </ single_expression >
+                                    </ expression >
+                                  </ write_argument >
+                                  < write_argument >
+                                    < expression >
+                                      < single_expression >
+                                        < term_expression >
+                                          < factor >
+                                            < variable i />
+                                          </ factor >
+                                        </ term_expression >
+                                      </ single_expression >
+                                    </ expression >
+                                  </ write_argument >
+                                  < write_argument >
+                                    < expression >
+                                      < single_expression >
+                                        < term_expression >
+                                          < factor >
+                                            < string_constant ', j = ' />
+                                          </ factor >
+                                        </ term_expression >
+                                      </ single_expression >
+                                    </ expression >
+                                  </ write_argument >
+                                  < write_argument >
+                                    < expression >
+                                      < single_expression >
+                                        < term_expression >
+                                          < factor >
+                                            < variable j />
+                                          </ factor >
+                                        </ term_expression >
+                                      </ single_expression >
+                                    </ expression >
+                                  </ write_argument >
+                                </ write_argument_list >
+                            </ statement >
+                            < statement empty_statement />
+                          </ statement_list >
+                        </ compound_statement >
+                      </ statement >
+                    </ for_statement >
+                  </ statement >
+                </ statement_list >
+              </ compound_statement >
+            </ statement >
+          </ for_statement >
+        </ statement >
+        < statement >
+          < writeln_statement writeln />
+        </ statement >
+        < statement >
+          < for_statement 
+            < assign_statement >
+              < lhs >
+                < variable ch />
+              </ lhs >
+              < rhs >
+                < expression >
+                  < single_expression >
+                    < term_expression >
+                      < factor >
+                        < char_constant 'a' />
+                      </ factor >
+                    </ term_expression >
+                  </ single_expression >
+                </ expression >
+              </ rhs >
+            </ assign_statement >
+            < expression >
+              < single_expression >
+                < term_expression >
+                  < factor >
+                    < char_constant 'z' />
+                  </ factor >
+                </ term_expression >
+              </ single_expression >
+            </ expression >
+            < statement >
+              < write_statement write />
+                < write_argument_list 
+                  < write_argument >
+                    < expression >
+                      < single_expression >
+                        < term_expression >
+                          < factor >
+                            < variable ch />
+                          </ factor >
+                        </ term_expression >
+                      </ single_expression >
+                    </ expression >
+                  </ write_argument >
+                </ write_argument_list >
+            </ statement >
+          </ for_statement >
+        </ statement >
+        < statement >
+          < writeln_statement writeln />
+        </ statement >
+        < statement >
+          < for_statement 
+            < assign_statement >
+              < lhs >
+                < variable ch />
+              </ lhs >
+              < rhs >
+                < expression >
+                  < single_expression >
+                    < term_expression >
+                      < factor >
+                        < char_constant 'Z' />
+                      </ factor >
+                    </ term_expression >
+                  </ single_expression >
+                </ expression >
+              </ rhs >
+            </ assign_statement >
+            < expression >
+              < single_expression >
+                < term_expression >
+                  < factor >
+                    < char_constant 'A' />
+                  </ factor >
+                </ term_expression >
+              </ single_expression >
+            </ expression >
+            < statement >
+              < write_statement write />
+                < write_argument_list 
+                  < write_argument >
+                    < expression >
+                      < single_expression >
+                        < term_expression >
+                          < factor >
+                            < variable ch />
+                          </ factor >
+                        </ term_expression >
+                      </ single_expression >
+                    </ expression >
+                  </ write_argument >
+                </ write_argument_list >
+            </ statement >
+          </ for_statement >
+        </ statement >
+        < statement >
+          < writeln_statement writeln />
+        </ statement >
+        < statement empty_statement />
+      </ statement_list >
+    </ compound_statement >
+  </ program_body >
