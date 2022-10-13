@@ -6,14 +6,35 @@
 #include <vector>
 #include <sstream>
 #include <cstdio>
+#include <set>
+#include <string>
+#include <algorithm>
 
 using namespace antlrcpp;
 using namespace antlr4;
 using namespace std;
 
+
+
+string toUpperCase(string str){
+    string upper_case(str);
+    transform(upper_case.begin(), upper_case.end(), upper_case.begin(), ::toupper);
+    return upper_case;
+}
+
 vector<string> token_type;
 
+set<string> op = {
+    ";", ",", ")", "(", "[", "]", ":=", ":", ".", "+", "-", "*", "/"
+};
+
+set<string> ignore_token = {
+    "BEGIN", "END", "<EOF>", "PROGRAM",
+    "FOR", "WHILE", "VAR", "TYPE", "UNTIL", "REPEAT", "DO", "THEN", "TO", "DOWNTO"
+};
+
 void load_token();
+string printTree(tree::ParseTree *t, ExprParser *recog);
 
 int main(int argc, const char *argv[])
 {
@@ -65,7 +86,10 @@ int main(int argc, const char *argv[])
         
         // Print the parse tree in Lisp format.
         cout << endl << "Parse tree (Lisp format):" << endl;
-        cout << tree->toStringTree(&parser) << endl;
+        //cout << tree->toString() << endl;
+        //printTree(tree, &parser);
+        cout << printTree(tree, &parser) << endl;
+        //cout << tree->toStringTree(&parser) << endl;
     }
     else
         cout << "Syntax: ./main.exe <option> <filename>" << endl << "<option>: -scan, -parse" << endl;
@@ -85,3 +109,73 @@ void load_token(){
         token_type.push_back(type);
     }
 }
+
+
+string printTree(tree::ParseTree *t, ExprParser *recog) {
+    const vector<string> &ruleNames = recog->getRuleNames();
+    string temp = antlrcpp::escapeWhitespace(tree::Trees::getNodeText(t, ruleNames), false);
+    if (t->children.empty()) {
+        return temp;
+    }
+
+    stringstream ss;
+    ss << "< " << temp << " >";
+
+    // Implement the recursive walk as iteration to avoid trouble with deep nesting.
+    stack<size_t> _stack;
+    stack<string> previous;
+    previous.push(temp);
+    size_t childIndex = 0;
+    tree::ParseTree *run = t;
+    while (childIndex < run->children.size()) {
+        tree::ParseTree *child = run->children[childIndex];
+        temp = antlrcpp::escapeWhitespace(tree::Trees::getNodeText(child, ruleNames), false);
+        if (!child->children.empty()) {
+            // Go deeper one level.
+            _stack.push(childIndex);
+            run = child;
+            childIndex = 0;
+            ss << '\n';
+            for (int i = 0; i < _stack.size(); i++)
+                ss << "  ";
+            ss << "< "<< temp << ' ';
+            if(!child->children[childIndex]->children.empty()){
+                ss << ">";
+            }
+            previous.push(temp);
+        } else {
+            if(op.find(temp) != op.end()){}
+            else if(ignore_token.find(toUpperCase(temp)) == ignore_token.end()){
+                ss << temp << " />";
+                previous.pop();
+                previous.push("");
+            }
+            //previous.pop();
+            while (++childIndex == run->children.size()) {
+                if (_stack.size() > 0) {
+                    // Reached the end of the current level. See if we can step up from here.
+                    
+                    if (previous.top() != ""){
+                        ss << '\n';
+                        for (int i = 0; i < _stack.size(); i++)
+                        ss << "  ";
+                        ss << "</ " << previous.top() << " >";
+                        previous.pop(); 
+                    }
+                    else{
+                        previous.pop();
+                    }
+                    childIndex = _stack.top();
+                    _stack.pop();
+                    run = run->parent;
+                } 
+                else {
+                    break;
+                }
+            }
+        }
+    }
+
+    return ss.str();
+}
+
