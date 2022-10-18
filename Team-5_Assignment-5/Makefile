@@ -14,13 +14,14 @@ PROG = Exprmain.cpp
 OUT = main.o
 ANTLR_SOURCES = target/generated-sources/ant4/*.cpp
 SOURCES = $(ANTLR_SOURCES) $(PROG)
+FILE = input.txt
 
 scan:
-	./$(OUT) -scan input.txt
+	./$(OUT) -scan $(FILE)
 	cat ScanOut.txt
 
 parse:
-	./$(OUT) -parse input.txt
+	./$(OUT) -parse $(FILE)
 	cat ParseOut.txt
 
 compile:

@@ -37,6 +37,12 @@ public:
 
     virtual antlrcpp::Any visitConstant(ExprParser::ConstantContext *context) = 0;
 
+    virtual antlrcpp::Any visitTypes_section(ExprParser::Types_sectionContext *context) = 0;
+
+    virtual antlrcpp::Any visitType_declaration(ExprParser::Type_declarationContext *context) = 0;
+
+    virtual antlrcpp::Any visitType_identifier(ExprParser::Type_identifierContext *context) = 0;
+
     virtual antlrcpp::Any visitVariable_section(ExprParser::Variable_sectionContext *context) = 0;
 
     virtual antlrcpp::Any visitVar_declaration(ExprParser::Var_declarationContext *context) = 0;
@@ -82,6 +88,8 @@ public:
     virtual antlrcpp::Any visitArray_type(ExprParser::Array_typeContext *context) = 0;
 
     virtual antlrcpp::Any visitArray_declaration(ExprParser::Array_declarationContext *context) = 0;
+
+    virtual antlrcpp::Any visitRecord_type(ExprParser::Record_typeContext *context) = 0;
 
     virtual antlrcpp::Any visitCompound_statement(ExprParser::Compound_statementContext *context) = 0;
 

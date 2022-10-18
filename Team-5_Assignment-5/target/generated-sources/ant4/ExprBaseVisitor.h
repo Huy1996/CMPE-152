@@ -51,6 +51,18 @@ public:
     return visitChildren(ctx);
   }
 
+  virtual antlrcpp::Any visitTypes_section(ExprParser::Types_sectionContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitType_declaration(ExprParser::Type_declarationContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitType_identifier(ExprParser::Type_identifierContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
   virtual antlrcpp::Any visitVariable_section(ExprParser::Variable_sectionContext *ctx) override {
     return visitChildren(ctx);
   }
@@ -140,6 +152,10 @@ public:
   }
 
   virtual antlrcpp::Any visitArray_declaration(ExprParser::Array_declarationContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitRecord_type(ExprParser::Record_typeContext *ctx) override {
     return visitChildren(ctx);
   }
 

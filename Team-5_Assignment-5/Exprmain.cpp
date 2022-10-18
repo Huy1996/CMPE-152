@@ -85,7 +85,7 @@ int main(int argc, const char *argv[])
         tree::ParseTree *tree = parser.program();
         
         // Print the parse tree in Lisp format.
-        cout << endl << "Parse tree (Lisp format):" << endl;
+        cout << endl << "Parse tree (XML format):" << endl;
         //cout << tree->toString() << endl;
         //printTree(tree, &parser);
         cout << printTree(tree, &parser) << endl;
@@ -138,8 +138,10 @@ string printTree(tree::ParseTree *t, ExprParser *recog) {
             ss << '\n';
             for (int i = 0; i < _stack.size(); i++)
                 ss << "  ";
-            ss << "< "<< temp << ' ';
-            if(!child->children[childIndex]->children.empty()){
+            ss << "< "<< temp << " ";
+            if(!child->children[0]->children.empty() or 
+                op.find(child->children[0]->getText()) != op.end() or
+                ignore_token.find(toUpperCase(temp)) != ignore_token.end()){
                 ss << ">";
             }
             previous.push(temp);

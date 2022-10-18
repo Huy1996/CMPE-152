@@ -18,7 +18,7 @@ program_body
 
 program_declaration 
     : ( constants_section SEMICOLON ) ? 
-    //   ( types_declaration SEMICOLON ) ?
+      ( types_section SEMICOLON ) ?
       ( routine_section SEMICOLON ) ?
       ( variable_section SEMICOLON ) ? ;
 
@@ -47,7 +47,18 @@ constant
     | string_constant 
     ;
 
+//------------type part--------------
+types_section
+    : TYPE type_declaration
+    ;
 
+type_declaration
+    : type_identifier EQUAL data_type ( SEMICOLON type_identifier EQUAL data_type ) *
+    ;
+
+type_identifier
+    : IDENTIFIER
+    ;
 
 //----------variable part------------
 
@@ -56,7 +67,7 @@ variable_section
     ;
 
 var_declaration  
-    : var_list COLON data_type ( SEMICOLON var_list COLON data_type) *
+    : var_list COLON data_type ( SEMICOLON var_list COLON data_type ) *
     ;
 
 var_list         
@@ -89,7 +100,7 @@ routine_name
     ;
 
 parameter_list
-    : parameter_declaration ( SEMICOLON parameter_declaration ) *
+    : LPAREN parameter_declaration ( SEMICOLON parameter_declaration ) * RPAREN
     ;
 
 parameter_declaration
@@ -133,6 +144,7 @@ argument
 data_type 
     : type_name
     | array_type 
+    | record_type
     ;
 
 type_name 
@@ -146,13 +158,17 @@ array_declaration
     : INTEGER DOTDOT INTEGER 
     ;
 
+record_type
+    : RECORD var_declaration SEMICOLON ? END
+    ;
+
 //----------statement part------------
 compound_statement 
     : BEGIN statement_list END
     ;
 
 statement_list     
-    : statement ( SEMICOLON statement )* 
+    : statement ( SEMICOLON statement )* SEMICOLON ?
     ;
 
 statement          
@@ -166,7 +182,7 @@ statement
     | write_statement
     | writeln_statement
     | call_procedure
-    | empty_statement
+//    | empty_statement
     ;
 
 empty_statement
@@ -245,7 +261,7 @@ case_statment
     ;
 
 case_branch_list
-    : case_branch ( SEMICOLON case_branch ) *
+    : case_branch ( SEMICOLON case_branch ) * SEMICOLON ?
     ;
 
 case_branch
