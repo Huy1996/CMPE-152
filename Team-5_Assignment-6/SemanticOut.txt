@@ -1,0 +1,50 @@
+INCOMPATIBLE ASSIGNMENT at line 19 (i:=1/3)
+There were 1 semantic errors.
+
+===== CROSS-REFERENCE TABLE =====
+
+*** PROGRAM test ***
+
+Identifier       Line numbers    Type specification
+----------       ------------    ------------------
+ch               004
+                                 Defined as: variable
+                                 Scope nesting level: 1
+                                 Type form = scalar, Type id = char
+count            003 022 028 030
+                                 Defined as: variable
+                                 Scope nesting level: 1
+                                 Type form = scalar, Type id = integer
+i                003 019 022 023 030 031 034 036 037 037 042 046
+                                 Defined as: variable
+                                 Scope nesting level: 1
+                                 Type form = scalar, Type id = integer
+j                003 020 022 023 031 044 041 041 042 043 047 047 048 048
+                                 Defined as: variable
+                                 Scope nesting level: 1
+                                 Type form = scalar, Type id = integer
+max             
+                                 Defined as: FUNCTION
+                                 Scope nesting level: 1
+                                 Type form = scalar, Type id = integer
+
+*** FUNCTION max ***
+
+Identifier       Line numbers    Type specification
+----------       ------------    ------------------
+max              013
+                                 Defined as: variable
+                                 Scope nesting level: 2
+                                 Type form = scalar, Type id = integer
+num1             006 009 010
+                                 Defined as: value parameter
+                                 Scope nesting level: 2
+                                 Type form = scalar, Type id = integer
+num2             006 009 012
+                                 Defined as: value parameter
+                                 Scope nesting level: 2
+                                 Type form = scalar, Type id = integer
+result           007 010 012 013
+                                 Defined as: variable
+                                 Scope nesting level: 2
+                                 Type form = scalar, Type id = integer

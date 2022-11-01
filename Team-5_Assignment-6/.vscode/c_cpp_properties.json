@@ -5,7 +5,8 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "/usr/local/include/antlr4-runtime",
-                "/usr/local/lib"
+                "/usr/local/lib",
+                "${workspaceFolder}/target/generated-sources/ant4"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/g++",
