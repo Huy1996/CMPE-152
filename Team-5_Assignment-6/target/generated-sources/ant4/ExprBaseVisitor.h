@@ -166,6 +166,30 @@ public:
     return visitChildren(ctx);
   }
 
+  virtual antlrcpp::Any visitProcedure_call(ExprParser::Procedure_callContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitProcedure_name(ExprParser::Procedure_nameContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitFunction_call(ExprParser::Function_callContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitFunction_name(ExprParser::Function_nameContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitArgument_list(ExprParser::Argument_listContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitArgument(ExprParser::ArgumentContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
   virtual antlrcpp::Any visitStatement(ExprParser::StatementContext *ctx) override {
     return visitChildren(ctx);
   }
@@ -231,30 +255,6 @@ public:
   }
 
   virtual antlrcpp::Any visitFor_statement(ExprParser::For_statementContext *ctx) override {
-    return visitChildren(ctx);
-  }
-
-  virtual antlrcpp::Any visitProcedure_call(ExprParser::Procedure_callContext *ctx) override {
-    return visitChildren(ctx);
-  }
-
-  virtual antlrcpp::Any visitProcedure_name(ExprParser::Procedure_nameContext *ctx) override {
-    return visitChildren(ctx);
-  }
-
-  virtual antlrcpp::Any visitFunction_call(ExprParser::Function_callContext *ctx) override {
-    return visitChildren(ctx);
-  }
-
-  virtual antlrcpp::Any visitFunction_name(ExprParser::Function_nameContext *ctx) override {
-    return visitChildren(ctx);
-  }
-
-  virtual antlrcpp::Any visitArgument_list(ExprParser::Argument_listContext *ctx) override {
-    return visitChildren(ctx);
-  }
-
-  virtual antlrcpp::Any visitArgument(ExprParser::ArgumentContext *ctx) override {
     return visitChildren(ctx);
   }
 

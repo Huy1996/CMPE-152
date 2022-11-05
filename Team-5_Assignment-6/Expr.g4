@@ -90,13 +90,11 @@ data_type
     locals [ Typespec *type = nullptr ]
     : simple_type        # simple_type_spec
     | array_type         # array_type_spec 
-    // | recordType        # recordTypespec
     ;
 
 simple_type          
     locals [ Typespec *type = nullptr ] 
     : type_identifier    # type_identifier_type_spec 
-    // | enumerationType   # enumerationTypespec
     | subrange_type      # subrange_type_spec
     ;
 
@@ -124,23 +122,19 @@ variable_name
     ] 
     : IDENTIFIER ;
 
-// enumerationType     : '(' enumerationConstant ( COMMA enumerationConstant )* ')' ;
-// enumerationConstant : constant_name ;
-subrange_type        : constant '..' constant ;
+
+subrange_type        
+    : constant DOTDOT constant 
+    ;
 
 array_type
-    : ARRAY '[' array_declaration ']' OF data_type ;
+    : ARRAY LBRACKET array_declaration RBRACKET OF data_type 
+    ;
 
 array_declaration 
     : simple_type ( COMMA simple_type )* 
     ;
 
-// recordType          
-//     locals [ SymtabEntry *entry = nullptr ]   
-//     : RECORD recordFields SEMICOLON ? END ;
-
-// recordFields 
-// : variable_declaration_list ;
 
 //-----------routine part------------
 routine_section      
@@ -188,7 +182,36 @@ parameter_name
     ]
     : IDENTIFIER ;
 
+procedure_call 
+    : procedure_name '(' argument_list? ')' 
+    ;
 
+procedure_name   
+    locals [ 
+        SymtabEntry *entry = nullptr 
+    ] 
+    : IDENTIFIER 
+    ;
+
+function_call 
+    : function_name '(' argument_list? ')' 
+    ;
+
+function_name    
+    locals [ Typespec *type = nullptr, SymtabEntry *entry = nullptr ] 
+    : IDENTIFIER 
+    ;
+     
+argument_list 
+    : argument ( COMMA argument )* 
+    ;
+
+argument     
+    : expression 
+    ;
+
+
+//-----------statement part------------
 statement : compound_statement
           | assign_statement
           | if_statement
@@ -224,6 +247,7 @@ rhs
     : expression 
     ;
 
+//-----------if statement part------------
 if_statement    
     : IF expression THEN true_statement ( ELSE false_statement )? 
     ;
@@ -236,6 +260,7 @@ false_statement
     : statement 
     ;
 
+//-----------case statement part------------
 case_statement
     locals [ 
         map<int, ExprParser::StatementContext*> *jumpTable = nullptr 
@@ -262,45 +287,22 @@ case_constant
     ]
     : constant ;
 
+//-----------repeat statement part------------
 repeat_statement 
     : REPEAT statement_list UNTIL expression 
     ;
 
+//-----------while statement part------------
 while_statement  
     : WHILE expression DO statement 
     ;
 
+//-----------for statement part------------
 for_statement 
     : FOR variable ASSIGN expression ( TO | DOWNTO ) expression DO statement 
     ;
 
-procedure_call 
-    : procedure_name '(' argument_list? ')' 
-    ;
-
-procedure_name   
-    locals [ 
-        SymtabEntry *entry = nullptr 
-    ] 
-    : IDENTIFIER 
-    ;
-
-function_call 
-    : function_name '(' argument_list? ')' 
-    ;
-
-function_name    
-    locals [ Typespec *type = nullptr, SymtabEntry *entry = nullptr ] 
-    : IDENTIFIER 
-    ;
-     
-argument_list 
-    : argument ( COMMA argument )* 
-    ;
-
-argument     
-    : expression 
-    ;
+//-----------write statement part------------
 
 write_statement   
     : WRITE write_argument_list 
@@ -406,9 +408,7 @@ string_constant
     : STRING 
     ;
        
-// relational_operator : '=' | '<>' | '<' | '<=' | '>' | '>=' ;
-// expression_operator : '+' | '-' | OR ;
-// term_operator : '*' | '/' | DIV | MOD | AND ;
+
 
 fragment A : ('a' | 'A') ;
 fragment B : ('b' | 'B') ;
@@ -556,10 +556,11 @@ FUNCTION  	   : F U N C T I O N ;
 IDENTIFIER : [a-zA-Z][a-zA-Z0-9]* ;
 INTEGER    : [0-9]+ ;
 
-REAL       : INTEGER '.' INTEGER
-           | INTEGER ('e' | 'E') ('+' | '-')? INTEGER
-           | INTEGER '.' INTEGER ('e' | 'E') ('+' | '-')? INTEGER
-           ;
+REAL       
+    : INTEGER '.' INTEGER
+    | INTEGER ('e' | 'E') ('+' | '-')? INTEGER
+    | INTEGER '.' INTEGER ('e' | 'E') ('+' | '-')? INTEGER
+    ;
 
 NEWLINE : '\r'? '\n' -> skip  ;
 WS      : [ \t]+ -> skip ; 
@@ -571,8 +572,8 @@ STRING    : QUOTE STRING_CHAR* QUOTE ;
 fragment CHARACTER_CHAR : ~('\'')   // any non-quote character
                         ;
 
-fragment STRING_CHAR : QUOTE QUOTE  // two consecutive quotes
-                     | ~('\'')      // any non-quote character
+fragment STRING_CHAR : QUOTE QUOTE  
+                     | ~('\'')      
                      ;
 
 COMMENT : '{' COMMENT_CHARACTER* '}' -> skip ;

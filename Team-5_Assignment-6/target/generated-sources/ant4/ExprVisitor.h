@@ -98,6 +98,18 @@ public:
 
     virtual antlrcpp::Any visitParameter_name(ExprParser::Parameter_nameContext *context) = 0;
 
+    virtual antlrcpp::Any visitProcedure_call(ExprParser::Procedure_callContext *context) = 0;
+
+    virtual antlrcpp::Any visitProcedure_name(ExprParser::Procedure_nameContext *context) = 0;
+
+    virtual antlrcpp::Any visitFunction_call(ExprParser::Function_callContext *context) = 0;
+
+    virtual antlrcpp::Any visitFunction_name(ExprParser::Function_nameContext *context) = 0;
+
+    virtual antlrcpp::Any visitArgument_list(ExprParser::Argument_listContext *context) = 0;
+
+    virtual antlrcpp::Any visitArgument(ExprParser::ArgumentContext *context) = 0;
+
     virtual antlrcpp::Any visitStatement(ExprParser::StatementContext *context) = 0;
 
     virtual antlrcpp::Any visitCompound_statement(ExprParser::Compound_statementContext *context) = 0;
@@ -131,18 +143,6 @@ public:
     virtual antlrcpp::Any visitWhile_statement(ExprParser::While_statementContext *context) = 0;
 
     virtual antlrcpp::Any visitFor_statement(ExprParser::For_statementContext *context) = 0;
-
-    virtual antlrcpp::Any visitProcedure_call(ExprParser::Procedure_callContext *context) = 0;
-
-    virtual antlrcpp::Any visitProcedure_name(ExprParser::Procedure_nameContext *context) = 0;
-
-    virtual antlrcpp::Any visitFunction_call(ExprParser::Function_callContext *context) = 0;
-
-    virtual antlrcpp::Any visitFunction_name(ExprParser::Function_nameContext *context) = 0;
-
-    virtual antlrcpp::Any visitArgument_list(ExprParser::Argument_listContext *context) = 0;
-
-    virtual antlrcpp::Any visitArgument(ExprParser::ArgumentContext *context) = 0;
 
     virtual antlrcpp::Any visitWrite_statement(ExprParser::Write_statementContext *context) = 0;
 

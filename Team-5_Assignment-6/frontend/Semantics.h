@@ -10,12 +10,48 @@
 #include "intermediate/symtab/SymtabEntry.h"
 #include "intermediate/symtab/Predefined.h"
 #include "intermediate/type/Typespec.h"
-#include "SemanticError.h"
 
 
 using namespace std;
 using namespace intermediate::symtab;
 using namespace intermediate::type;
+
+enum class ERROR
+{
+    UNDECLARED_IDENTIFIER, REDECLARED_IDENTIFIER, INVALID_CONSTANT, INVALID_SIGN, INVALID_TYPE,
+    INVALID_VARIABLE, TYPE_MISMATCH, TYPE_MUST_BE_INTEGER, TYPE_MUST_BE_NUMERIC, TYPE_MUST_BE_BOOLEAN,
+    INCOMPATIBLE_ASSIGNMENT, INCOMPATIBLE_COMPARISON, INVALID_CONTROL_VARIABLE, DUPLICATE_CASE_CONSTANT,
+    NAME_MUST_BE_PROCEDURE, NAME_MUST_BE_FUNCTION, ARGUMENT_COUNT_MISMATCH, ARGUMENT_MUST_BE_VARIABLE,
+    INVALID_REFERENCE_PARAMETER, INVALID_RETURN_TYPE, TOO_MANY_SUBSCRIPTS, INVALID_FIELD
+};
+
+static const string error_message[] ={
+    "UNDECLARED IDENTIFIER", "REDECLARED IDENTIFIER", "INVALID CONSTANT", "INVALID SIGN", "INVALID TYPE", 
+    "INVALID VARIABLE", "TYPE MISMATCH", "TYPE MUST BE INTEGER", "TYPE MUST BE NUMERIC", "TYPE MUST BE BOOLEAN",
+    "INCOMPATIBLE ASSIGNMENT", "INCOMPATIBLE COMPARISON", "INVALID CONTROL VARIABLE", "DUPLICATE CASE CONSTANT",
+    "NAME MUST BE PROCEDURE", "NAME MUST BE FUNCTION", "ARGUMENT COUNT MISMATCH", "ARGUMENT MUST BE VARIABLE",
+    "INVALID REFERENCE PARAMETER", "INVALID RETURN TYPE", "TOO MANY SUBSCRIPTS", "INVALID FIELD"
+};
+
+
+class SemanticError{
+private:
+    int  count;
+
+public:
+    SemanticError() : count(0){}
+
+    int getCount() const { return count; }
+
+    void print(ERROR error, int line, string text){
+        printf("%s at line %d (%s)", error_message[(int) error].c_str(), line, text.c_str());
+        count++;
+    }
+
+    void print(ERROR error, antlr4::ParserRuleContext *ctx){
+        print(error, ctx->getStart()->getLine(), ctx->getText());
+    }
+};
 
 class Semantics : public ExprBaseVisitor
 {
